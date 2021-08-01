@@ -1,8 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
-import org.springframework.samples.petclinic.customers.api.OwnerServiceApi;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
+import org.springframework.samples.petclinic.service.customers.PetServiceApi;
 
-//@FeignClient("customers-service")
-public interface OwnerService extends OwnerServiceApi {
+@FeignClient("customers-service")
+public interface CustomersService extends OwnerServiceApi, PetServiceApi {
 
 }

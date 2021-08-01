@@ -1,8 +1,9 @@
 package org.springframework.samples.petclinic.service;
 
-import org.springframework.samples.petclinic.visit.api.VisitServiceApi;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.samples.petclinic.service.visits.VisitServiceApi;
 
-//@FeignClient("visit-service")
-public interface VisitService extends VisitServiceApi {
+@FeignClient("visits-service")
+public interface VisitsService extends VisitServiceApi {
 
 }

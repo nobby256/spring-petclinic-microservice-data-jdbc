@@ -23,12 +23,12 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.springframework.samples.petclinic.customers.api.OwnerServiceApi;
-import org.springframework.samples.petclinic.customers.api.PetServiceApi;
-import org.springframework.samples.petclinic.customers.model.Owner;
-import org.springframework.samples.petclinic.customers.model.OwnerRequest;
-import org.springframework.samples.petclinic.visit.api.VisitServiceApi;
-import org.springframework.samples.petclinic.visit.model.Visit;
+import org.springframework.samples.petclinic.service.customers.Owner;
+import org.springframework.samples.petclinic.service.customers.OwnerRequest;
+import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
+import org.springframework.samples.petclinic.service.customers.PetServiceApi;
+import org.springframework.samples.petclinic.service.visits.Visit;
+import org.springframework.samples.petclinic.service.visits.VisitServiceApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;

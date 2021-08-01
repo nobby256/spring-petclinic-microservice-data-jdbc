@@ -21,12 +21,12 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.core.convert.ConversionService;
-import org.springframework.samples.petclinic.customers.api.OwnerServiceApi;
-import org.springframework.samples.petclinic.customers.api.PetServiceApi;
-import org.springframework.samples.petclinic.customers.model.Owner;
-import org.springframework.samples.petclinic.customers.model.Pet;
-import org.springframework.samples.petclinic.customers.model.PetRequest;
-import org.springframework.samples.petclinic.customers.model.PetType;
+import org.springframework.samples.petclinic.service.customers.Owner;
+import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
+import org.springframework.samples.petclinic.service.customers.Pet;
+import org.springframework.samples.petclinic.service.customers.PetRequest;
+import org.springframework.samples.petclinic.service.customers.PetServiceApi;
+import org.springframework.samples.petclinic.service.customers.PetType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.samples.petclinic.customers.api.OwnerServiceApi;
-import org.springframework.samples.petclinic.customers.api.PetServiceApi;
-import org.springframework.samples.petclinic.customers.model.Owner;
-import org.springframework.samples.petclinic.customers.model.Pet;
-import org.springframework.samples.petclinic.customers.model.PetType;
-import org.springframework.samples.petclinic.visit.api.VisitServiceApi;
+import org.springframework.samples.petclinic.service.customers.Owner;
+import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
+import org.springframework.samples.petclinic.service.customers.Pet;
+import org.springframework.samples.petclinic.service.customers.PetServiceApi;
+import org.springframework.samples.petclinic.service.customers.PetType;
+import org.springframework.samples.petclinic.service.visits.VisitServiceApi;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
@@ -72,21 +72,25 @@ public class VisitControllerTests {
 	@Test
 	public void testInitNewVisitForm() throws Exception {
 		mockMvc.perform(get("/owners/{ownerId}/pets/{petId}/visits/new", TEST_OWNER_ID, TEST_PET_ID))
-				.andExpect(status().isOk()).andExpect(view().name("pets/createOrUpdateVisitForm"));
+				.andExpect(status().isOk())
+				.andExpect(view().name("pets/createOrUpdateVisitForm"));
 	}
 
 	@Test
 	public void testProcessNewVisitFormSuccess() throws Exception {
 		mockMvc.perform(post("/owners/{ownerId}/pets/{petId}/visits/new", TEST_OWNER_ID, TEST_PET_ID)
-				.param("visitDate", "2021-01-01").param("description", "Visit Description"))
-				.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/owners/{ownerId}"));
+				.param("visitDate", "2021-01-01")
+				.param("description", "Visit Description"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
 
 	@Test
 	public void testProcessNewVisitFormHasErrors() throws Exception {
 		mockMvc.perform(
 				post("/owners/{ownerId}/pets/{petId}/visits/new", TEST_OWNER_ID, TEST_PET_ID).param("name", "George"))
-				.andExpect(model().attributeHasErrors("visitForm")).andExpect(status().isOk())
+				.andExpect(model().attributeHasErrors("visitForm"))
+				.andExpect(status().isOk())
 				.andExpect(view().name("pets/createOrUpdateVisitForm"));
 	}
 

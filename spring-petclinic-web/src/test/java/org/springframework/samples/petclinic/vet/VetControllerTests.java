@@ -10,11 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.samples.petclinic.vet.api.VetServiceApi;
-import org.springframework.samples.petclinic.vet.model.Specialty;
-import org.springframework.samples.petclinic.vet.model.SpecialtyRef;
-import org.springframework.samples.petclinic.vet.model.VetDetail;
-import org.springframework.samples.petclinic.vet.web.SpecialtyRepository;
+import org.springframework.samples.petclinic.service.vets.Specialty;
+import org.springframework.samples.petclinic.service.vets.VetDetail;
+import org.springframework.samples.petclinic.service.vets.VetServiceApi;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
@@ -29,9 +27,6 @@ public class VetControllerTests {
 	@MockBean
 	private VetServiceApi vets;
 
-	@MockBean
-	private SpecialtyRepository specialties;
-
 	@BeforeEach
 	public void setup() {
 		VetDetail james = new VetDetail();
@@ -44,20 +39,19 @@ public class VetControllerTests {
 		helen.setLastName("Leary");
 		helen.setId(2);
 
-		SpecialtyRef radiologyRef = new SpecialtyRef(1);
-		helen.getSpecialtyRefs().add(radiologyRef);
-
 		Specialty radiology = new Specialty();
 		radiology.setId(1);
 		radiology.setName("radiology");
+		helen.getSpecialties().add(radiology);
 
 		given(this.vets.findAllVets()).willReturn(Lists.newArrayList(james, helen));
-		given(this.specialties.findById(1)).willReturn(radiology);
 	}
 
 	@Test
 	public void testShowVetList() throws Exception {
-		mockMvc.perform(get("/vets")).andExpect(status().isOk()).andExpect(model().attributeExists("vets"))
+		mockMvc.perform(get("/vets"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("vets"))
 				.andExpect(view().name("vets/vetList"));
 	}
 

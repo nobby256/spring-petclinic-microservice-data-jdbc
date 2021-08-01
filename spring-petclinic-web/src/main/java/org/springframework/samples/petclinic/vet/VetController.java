@@ -17,8 +17,8 @@ package org.springframework.samples.petclinic.vet;
 
 import java.util.List;
 
-import org.springframework.samples.petclinic.vet.api.VetServiceApi;
-import org.springframework.samples.petclinic.vet.model.VetDetail;
+import org.springframework.samples.petclinic.service.vets.VetDetail;
+import org.springframework.samples.petclinic.service.vets.VetServiceApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
