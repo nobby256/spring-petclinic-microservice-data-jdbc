@@ -24,7 +24,7 @@ public class VisitServiceImpl implements VisitServiceApi {
 	@Override
 	public Visit createVisits(@Valid VisitRequest visitRequest, int petId) {
 		Visit visit = new Visit();
-		visit.setDate(visitRequest.getDate());
+		visit.setVisitDate(visitRequest.getVisitDate());
 		visit.setDescription(visitRequest.getDescription());
 		visit.setPetId(petId);
 		visitRepository.save(visit);

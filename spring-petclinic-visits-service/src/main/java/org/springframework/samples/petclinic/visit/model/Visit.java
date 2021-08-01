@@ -41,7 +41,7 @@ public class Visit {
 	private Integer id;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
+	private LocalDate visitDate;
 
 	@NotEmpty
 	private String description;

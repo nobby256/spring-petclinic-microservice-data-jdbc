@@ -12,7 +12,7 @@ import lombok.Data;
 public class VisitRequest {
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
+	private LocalDate visitDate;
 
 	@NotEmpty
 	private String description;
