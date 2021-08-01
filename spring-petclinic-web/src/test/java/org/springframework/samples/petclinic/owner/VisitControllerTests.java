@@ -78,7 +78,7 @@ public class VisitControllerTests {
 	@Test
 	public void testProcessNewVisitFormSuccess() throws Exception {
 		mockMvc.perform(post("/owners/{ownerId}/pets/{petId}/visits/new", TEST_OWNER_ID, TEST_PET_ID)
-				.param("date", "2021-01-01").param("description", "Visit Description"))
+				.param("visitDate", "2021-01-01").param("description", "Visit Description"))
 				.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
 

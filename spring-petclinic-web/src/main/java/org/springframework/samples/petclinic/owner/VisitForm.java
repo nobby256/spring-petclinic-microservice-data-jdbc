@@ -10,7 +10,7 @@ public class VisitForm {
 	private boolean isCreate;
 
 	@NotEmpty
-	private String date;
+	private String visitDate;
 
 	@NotEmpty
 	private String description;

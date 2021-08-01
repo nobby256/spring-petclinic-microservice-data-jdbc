@@ -86,11 +86,11 @@ class VisitController {
 	@GetMapping("/visits/new")
 	public String initNewVisitForm(VisitForm form) {
 		Visit visit = new Visit();
-		visit.setDate(getToday());
+		visit.setVisitDate(getToday());
 		copy(visit, form);
 		return "pets/createOrUpdateVisitForm";
 	}
-	
+
 	protected LocalDate getToday() {
 		return LocalDate.now();
 	}
@@ -112,12 +112,12 @@ class VisitController {
 
 	protected void copy(Visit visit, VisitForm form) {
 		form.setCreate(visit.getId() == null ? true : false);
-		form.setDate(convertionService.convert(visit.getDate(), String.class));
+		form.setVisitDate(convertionService.convert(visit.getVisitDate(), String.class));
 		form.setDescription(visit.getDescription());
 	}
 
 	protected void copy(VisitForm form, VisitRequest request) {
-		request.setDate(convertionService.convert(form.getDate(), LocalDate.class));
+		request.setVisitDate(convertionService.convert(form.getVisitDate(), LocalDate.class));
 		request.setDescription(form.getDescription());
 	}
 }
