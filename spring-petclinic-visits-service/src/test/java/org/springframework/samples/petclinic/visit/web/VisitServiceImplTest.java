@@ -70,7 +70,7 @@ public class VisitServiceImplTest {
 
 	@Test
 	void findByPetIdTest() {
-		List<Visit> actual = target.findVisitByPetId(7);
+		List<Visit> actual = target.findVisitByPetId(6, 7);
 
 		assertThat(actual).contains(expectedVisits(7));
 	}

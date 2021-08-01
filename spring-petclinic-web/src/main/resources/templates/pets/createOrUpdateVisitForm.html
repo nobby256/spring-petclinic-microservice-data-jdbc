@@ -47,7 +47,7 @@
       <th>Description</th>
     </tr>
     <tr th:each="petVisit : ${petVisits}">
-      <td th:text="${{petVisit.date}}}"></td>
+      <td th:text="${{petVisit.visitDate}}"></td>
       <td th:text=" ${petVisit.description}"></td>
     </tr>
   </table>

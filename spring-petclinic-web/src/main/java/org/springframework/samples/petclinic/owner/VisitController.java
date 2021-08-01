@@ -75,7 +75,7 @@ class VisitController {
 		Map<Integer, String> petTypeMap = new HashMap<>();
 		customersService.getPetTypes().stream().forEach(petType -> petTypeMap.put(petType.getId(), petType.getName()));
 		model.addAttribute("petTypeMap", petTypeMap);
-		model.addAttribute("petVisits", this.visits.findVisitByPetId(petId));
+		model.addAttribute("petVisits", this.visits.findVisitByPetId(ownerId, petId));
 	}
 
 	// Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is
@@ -95,14 +95,14 @@ class VisitController {
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is
 	// called
 	@PostMapping("/visits/new")
-	public String processNewVisitForm(@Valid VisitForm form, BindingResult result, @PathVariable("petId") int petId) {
+	public String processNewVisitForm(@Valid VisitForm form, BindingResult result, @PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId) {
 		if (result.hasErrors()) {
 			return "pets/createOrUpdateVisitForm";
 		}
 
 		VisitRequest request = new VisitRequest();
 		copy(form, request);
-		visits.createVisits(request, petId);
+		visits.createVisits(request, ownerId, petId);
 
 		return "redirect:/owners/{ownerId}";
 	}

@@ -10,9 +10,11 @@ import javax.validation.Valid;
 import org.springframework.samples.petclinic.visit.api.VisitServiceApi;
 import org.springframework.samples.petclinic.visit.model.Visit;
 import org.springframework.samples.petclinic.visit.model.VisitRequest;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
+@RequestMapping
 public class VisitServiceImpl implements VisitServiceApi {
 
 	protected VisitRepository visitRepository;
@@ -22,7 +24,7 @@ public class VisitServiceImpl implements VisitServiceApi {
 	}
 
 	@Override
-	public Visit createVisits(@Valid VisitRequest visitRequest, int petId) {
+	public Visit createVisits(@Valid VisitRequest visitRequest, int ownerId, int petId) {
 		Visit visit = new Visit();
 		visit.setVisitDate(visitRequest.getVisitDate());
 		visit.setDescription(visitRequest.getDescription());
@@ -32,7 +34,7 @@ public class VisitServiceImpl implements VisitServiceApi {
 	}
 
 	@Override
-	public List<Visit> findVisitByPetId(int petId) {
+	public List<Visit> findVisitByPetId(int ownerId, int petId) {
 		return visitRepository.findByPetId(petId);
 	}
 

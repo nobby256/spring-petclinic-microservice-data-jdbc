@@ -59,7 +59,7 @@
             </tr>
           </thead>
           <tr th:each="visit : ${visitMap.get(pet.id)}">
-            <td th:text="${{visit.date}}"></td>
+            <td th:text="${{visit.visitDate}}"></td>
             <td th:text="${visit?.description}"></td>
           </tr>
           <tr>

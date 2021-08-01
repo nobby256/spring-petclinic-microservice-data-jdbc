@@ -19,10 +19,10 @@ public interface VisitServiceApi {
 
 	@PostMapping("owners/{ownerId}/pets/{petId}/visits")
 	@ResponseStatus(HttpStatus.CREATED)
-	Visit createVisits(@Valid @RequestBody VisitRequest visitRequest, @PathVariable("petId") int petId);
+	Visit createVisits(@Valid @RequestBody VisitRequest visitRequest, @PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId);
 
-	@GetMapping("owners/*/pets/{petId}/visits")
-	List<Visit> findVisitByPetId(@PathVariable("petId") int petId);
+	@GetMapping("owners/{ownerId}/pets/{petId}/visits")
+	List<Visit> findVisitByPetId(@PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId);
 
 	@GetMapping("pets/visits")
 	Map<Integer, List<Visit>> findVisitByPetIds(@RequestParam("petId") List<Integer> petIds);

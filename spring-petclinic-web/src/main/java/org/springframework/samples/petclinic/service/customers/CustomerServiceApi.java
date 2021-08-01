@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ import feign.Param;
 
 public interface CustomerServiceApi {
 
-	//OwnerServiceApi
+	// OwnerServiceApi
 	@PostMapping(path = "/owners")
 	@ResponseStatus(HttpStatus.CREATED)
 	Owner createOwner(@Valid @RequestBody OwnerRequest ownerRequest);
@@ -32,7 +33,7 @@ public interface CustomerServiceApi {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void updateOwner(@Valid @RequestBody OwnerRequest ownerRequest, @PathVariable("ownerId") int ownerId);
 
-	//PetServiceApi
+	// PetServiceApi
 	@GetMapping(path = "/petTypes")
 	List<PetType> getPetTypes();
 
@@ -42,13 +43,14 @@ public interface CustomerServiceApi {
 
 	@PutMapping(path = "/owners/{ownerId}/pets/{petId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	void updatePet(@RequestBody PetRequest petRequest, @PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId);
+	void updatePet(@RequestBody PetRequest petRequest, @PathVariable("ownerId") int ownerId,
+			@PathVariable("petId") int petId);
 
 	@GetMapping(path = "owners/*/pets/{petId}")
 	Pet findPetByPetId(@PathVariable("petId") int petId);
 
-	@GetMapping(path = "owners/{ownerId}/pets", params = { "petName" })
-	List<Pet> findPetByOwnerIdAndPetName(@Param("ownerId") int ownerId, @Param("petName") String petName);
+	@GetMapping(path = "owners/{ownerId}/pets", params = { "petName" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	List<Pet> findPetByOwnerIdAndPetName(@PathVariable("ownerId") int ownerId, @Param("petName") String petName);
 
 	@GetMapping(path = "owners/{ownerId}/pets")
 	List<Pet> findPetByOwnerId(@Param("ownerId") int ownerId);

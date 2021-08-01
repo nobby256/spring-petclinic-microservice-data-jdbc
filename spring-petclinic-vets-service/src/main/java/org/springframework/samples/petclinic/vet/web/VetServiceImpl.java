@@ -7,9 +7,11 @@ import org.springframework.samples.petclinic.vet.api.VetServiceApi;
 import org.springframework.samples.petclinic.vet.model.Specialty;
 import org.springframework.samples.petclinic.vet.model.Vet;
 import org.springframework.samples.petclinic.vet.model.VetDetail;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
+@RequestMapping
 public class VetServiceImpl implements VetServiceApi {
 
 	protected VetRepository vetRepository;

@@ -25,9 +25,7 @@ spring:
   messages:
     basename: messages/messages
 
-ribbon:
-  eureka:
-    enabled: false
+# ribbon.eureka.enabled: false
 
 eureka:
   instance:

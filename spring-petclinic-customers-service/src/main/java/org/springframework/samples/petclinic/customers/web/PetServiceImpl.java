@@ -6,9 +6,11 @@ import org.springframework.samples.petclinic.customers.api.PetServiceApi;
 import org.springframework.samples.petclinic.customers.model.Pet;
 import org.springframework.samples.petclinic.customers.model.PetRequest;
 import org.springframework.samples.petclinic.customers.model.PetType;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
+@RequestMapping
 public class PetServiceImpl implements PetServiceApi {
 
 	protected PetRepository petRepository;

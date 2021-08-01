@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.samples.petclinic.customers.api.OwnerServiceApi;
 import org.springframework.samples.petclinic.customers.model.Owner;
 import org.springframework.samples.petclinic.customers.model.OwnerRequest;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
+@RequestMapping
 public class OwnerServiceImpl implements OwnerServiceApi {
 
 	protected OwnerRepository ownerRepository;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.samples.petclinic.customers.model.Pet;
 import org.springframework.samples.petclinic.customers.model.PetRequest;
 import org.springframework.samples.petclinic.customers.model.PetType;
@@ -25,13 +26,14 @@ public interface PetServiceApi {
 
 	@PutMapping(path = "/owners/{ownerId}/pets/{petId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	void updatePet(@RequestBody PetRequest petRequest, @PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId);
+	void updatePet(@RequestBody PetRequest petRequest, @PathVariable("ownerId") int ownerId,
+			@PathVariable("petId") int petId);
 
 	@GetMapping(path = "owners/*/pets/{petId}")
 	Pet findPetByPetId(@PathVariable("petId") int petId);
 
-	@GetMapping(path = "owners/{ownerId}/pets", params = { "petName" })
-	List<Pet> findPetByOwnerIdAndPetName(@Param("ownerId") int ownerId, @Param("petName") String petName);
+	@GetMapping(path = "owners/{ownerId}/pets", params = { "petName" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	List<Pet> findPetByOwnerIdAndPetName(@PathVariable("ownerId") int ownerId, @Param("petName") String petName);
 
 	@GetMapping(path = "owners/{ownerId}/pets")
 	List<Pet> findPetByOwnerId(@Param("ownerId") int ownerId);
