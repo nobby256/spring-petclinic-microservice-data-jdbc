@@ -16,12 +16,18 @@ spring:
       allow-override: true
       # Override configuration with any local property source
       override-none: true
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: none
   jmx:
     enabled: true
+  datasource:
+    url: jdbc:mysql://localhost/petclinic_jdbc
+    username: root
+    password: password
+  messages:
+    basename: messages/messages
+
+ribbon:
+  eureka:
+    enabled: false
 
 eureka:
   instance:

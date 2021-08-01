@@ -1,10 +1,10 @@
-package org.springframework.samples.petclinic.customers;
+package org.springframework.samples.petclinic.customers.web;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootApplication
-@ActiveProfiles("test")
+@ActiveProfiles("ut")
 public class TestApplication {
 
 }
