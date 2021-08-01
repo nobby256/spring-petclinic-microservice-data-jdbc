@@ -14,7 +14,7 @@ import lombok.ToString;
  *
  * @author Maciej Walkowiak
  */
-@Table("vet_specialty")
+@Table("VET_SPECIALTY")
 @Data
 @EqualsAndHashCode
 @ToString

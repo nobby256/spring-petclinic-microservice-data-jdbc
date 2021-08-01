@@ -54,7 +54,7 @@ public class Vet implements Serializable {
 	private String lastName;
 
 	@JsonIgnore
-	@MappedCollection(idColumn = "vet", keyColumn = "specialty")
+	@MappedCollection(idColumn = "VET", keyColumn = "SPECIALTY")
 	private List<SpecialtyRef> specialtyRefs = new ArrayList<>();
 
 }
