@@ -20,6 +20,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -31,6 +33,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  */
 @SpringBootApplication
+@EnableFeignClients
+@EnableDiscoveryClient
 public class PetClinicApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
@@ -39,10 +43,10 @@ public class PetClinicApplication implements WebMvcConfigurer {
 
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
-        //DateFormatterRegistrar registrar = new DateFormatterRegistrar();
-        registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        registrar.registerFormatters(registry);
+		DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
+		// DateFormatterRegistrar registrar = new DateFormatterRegistrar();
+		registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		registrar.registerFormatters(registry);
 	}
 
 }

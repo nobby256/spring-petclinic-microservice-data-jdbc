@@ -21,11 +21,10 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.core.convert.ConversionService;
+import org.springframework.samples.petclinic.service.customers.CustomerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Owner;
-import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Pet;
 import org.springframework.samples.petclinic.service.customers.PetRequest;
-import org.springframework.samples.petclinic.service.customers.PetServiceApi;
 import org.springframework.samples.petclinic.service.customers.PetType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -47,24 +46,22 @@ class PetController {
 
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
-	private final PetServiceApi pets;
-	private final OwnerServiceApi owners;
+	private final CustomerServiceApi customersService;
 	private final ConversionService convertionService;
 
-	public PetController(PetServiceApi pets, OwnerServiceApi owners, ConversionService convertionService) {
-		this.pets = pets;
-		this.owners = owners;
+	public PetController(CustomerServiceApi customersService, ConversionService convertionService) {
+		this.customersService = customersService;
 		this.convertionService = convertionService;
 	}
 
 	@ModelAttribute("types")
 	public Collection<PetType> populatePetTypes() {
-		return pets.getPetTypes();
+		return customersService.getPetTypes();
 	}
 
 	@ModelAttribute("owner")
 	public Owner findOwner(@PathVariable("ownerId") int ownerId) {
-		return owners.findOwnerByOwnerId(ownerId);
+		return customersService.findOwnerByOwnerId(ownerId);
 	}
 
 	@GetMapping("/pets/new")
@@ -78,13 +75,13 @@ class PetController {
 		if (result.hasErrors()) {
 			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		}
-		if (!pets.findPetByOwnerIdAndPetName(ownerId, form.getName()).isEmpty()) {
+		if (!customersService.findPetByOwnerIdAndPetName(ownerId, form.getName()).isEmpty()) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
 
 		PetRequest request = new PetRequest();
 		copy(form, request);
-		pets.createPet(request, ownerId);
+		customersService.createPet(request, ownerId);
 
 		return "redirect:/owners/{ownerId}";
 	}
@@ -107,7 +104,7 @@ class PetController {
 
 		PetRequest request = new PetRequest();
 		copy(form, request);
-		pets.updatePet(request, ownerId, petId);
+		customersService.updatePet(request, ownerId, petId);
 
 		return "redirect:/owners/{ownerId}";
 	}

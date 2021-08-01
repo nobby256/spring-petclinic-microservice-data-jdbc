@@ -23,10 +23,9 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.springframework.samples.petclinic.service.customers.CustomerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Owner;
 import org.springframework.samples.petclinic.service.customers.OwnerRequest;
-import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
-import org.springframework.samples.petclinic.service.customers.PetServiceApi;
 import org.springframework.samples.petclinic.service.visits.Visit;
 import org.springframework.samples.petclinic.service.visits.VisitServiceApi;
 import org.springframework.stereotype.Controller;
@@ -49,14 +48,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
-	private final OwnerServiceApi owners;
-	private final PetServiceApi pets;
-	private final VisitServiceApi visits;
+	private final CustomerServiceApi consumersSercice;
+	private final VisitServiceApi visitsService;
 
-	public OwnerController(OwnerServiceApi owners, PetServiceApi pets, VisitServiceApi visits) {
-		this.owners = owners;
-		this.pets = pets;
-		this.visits = visits;
+	public OwnerController(CustomerServiceApi consumersSercice, VisitServiceApi visitsService) {
+		this.consumersSercice = consumersSercice;
+		this.visitsService = visitsService;
 	}
 
 	@GetMapping("/owners/find")
@@ -70,7 +67,7 @@ class OwnerController {
 			form.setLastName("");
 		}
 		// find owners by last name
-		Collection<Owner> results = owners.findOwnerByLastName(form.getLastName());
+		Collection<Owner> results = consumersSercice.findOwnerByLastName(form.getLastName());
 		if (results.isEmpty()) {
 			// no owners found
 			result.rejectValue("lastName", "notFound", "not found");
@@ -101,7 +98,7 @@ class OwnerController {
 
 		OwnerRequest request = new OwnerRequest();
 		copy(form, request);
-		int ownerId = owners.createOwner(request).getId();
+		int ownerId = consumersSercice.createOwner(request).getId();
 
 		return "redirect:/owners/" + ownerId;
 	}
@@ -109,7 +106,7 @@ class OwnerController {
 	@GetMapping("/owners/{ownerId}/edit")
 	public String initUpdateOwnerForm(@ModelAttribute(binding = false) OwnerForm form,
 			@PathVariable("ownerId") int ownerId) {
-		Owner owner = owners.findOwnerByOwnerId(ownerId);
+		Owner owner = consumersSercice.findOwnerByOwnerId(ownerId);
 		copy(owner, form);
 
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
@@ -124,7 +121,7 @@ class OwnerController {
 
 		OwnerRequest request = new OwnerRequest();
 		copy(form, request);
-		owners.updateOwner(request, ownerId);
+		consumersSercice.updateOwner(request, ownerId);
 
 		return "redirect:/owners/{ownerId}";
 	}
@@ -137,15 +134,15 @@ class OwnerController {
 	 */
 	@GetMapping("/owners/{ownerId}")
 	public String showOwner(@PathVariable("ownerId") int ownerId, ModelMap model) {
-		Owner owner = owners.findOwnerByOwnerId(ownerId);
+		Owner owner = consumersSercice.findOwnerByOwnerId(ownerId);
 		model.addAttribute("owner", owner);
 
 		Map<Integer, String> petTypeMap = new HashMap<>();
-		pets.getPetTypes().stream().forEach(petType -> petTypeMap.put(petType.getId(), petType.getName()));
+		consumersSercice.getPetTypes().stream().forEach(petType -> petTypeMap.put(petType.getId(), petType.getName()));
 		model.addAttribute("petTypeMap", petTypeMap);
 
 		List<Integer> petIds = owner.getPets().stream().map(pet -> pet.getId()).collect(Collectors.toList());
-		Map<Integer, List<Visit>> visitMap = petIds.isEmpty() ? new HashMap<>() : visits.findVisitByPetIds(petIds);
+		Map<Integer, List<Visit>> visitMap = petIds.isEmpty() ? new HashMap<>() : visitsService.findVisitByPetIds(petIds);
 		model.addAttribute("visitMap", visitMap);
 
 		return "owners/ownerDetails";

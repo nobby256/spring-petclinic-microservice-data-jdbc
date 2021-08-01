@@ -13,10 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.samples.petclinic.service.customers.CustomerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Owner;
-import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Pet;
-import org.springframework.samples.petclinic.service.customers.PetServiceApi;
 import org.springframework.samples.petclinic.service.customers.PetType;
 import org.springframework.samples.petclinic.service.visits.VisitServiceApi;
 import org.springframework.test.web.servlet.MockMvc;
@@ -39,10 +38,7 @@ public class VisitControllerTests {
 	private VisitServiceApi visits;
 
 	@MockBean
-	private PetServiceApi pets;
-
-	@MockBean
-	private OwnerServiceApi owners;
+	private CustomerServiceApi customersService;
 
 	@BeforeEach
 	public void init() {
@@ -64,9 +60,9 @@ public class VisitControllerTests {
 		petTypeStream.add(new PetType(6, "hamster"));
 		List<PetType> petTypes = petTypeStream.build().collect(Collectors.toList());
 
-		given(this.owners.findOwnerByOwnerId(TEST_OWNER_ID)).willReturn(george);
-		given(this.pets.findPetByPetId(TEST_PET_ID)).willReturn(leo);
-		given(this.pets.getPetTypes()).willReturn(petTypes);
+		given(customersService.findOwnerByOwnerId(TEST_OWNER_ID)).willReturn(george);
+		given(customersService.findPetByPetId(TEST_PET_ID)).willReturn(leo);
+		given(customersService.getPetTypes()).willReturn(petTypes);
 	}
 
 	@Test

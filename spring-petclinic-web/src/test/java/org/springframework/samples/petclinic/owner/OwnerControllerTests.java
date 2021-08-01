@@ -18,10 +18,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.samples.petclinic.service.customers.CustomerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Owner;
-import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Pet;
-import org.springframework.samples.petclinic.service.customers.PetServiceApi;
 import org.springframework.samples.petclinic.service.customers.PetType;
 import org.springframework.samples.petclinic.service.visits.Visit;
 import org.springframework.samples.petclinic.service.visits.VisitServiceApi;
@@ -41,10 +40,7 @@ public class OwnerControllerTests {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private OwnerServiceApi owners;
-
-	@MockBean
-	private PetServiceApi pets;
+	private CustomerServiceApi customersService;
 
 	@MockBean
 	private VisitServiceApi visits;
@@ -65,7 +61,7 @@ public class OwnerControllerTests {
 		george.setCity("Madison");
 		george.setTelephone("6085551023");
 		george.getPets().add(leo);
-		given(this.owners.findOwnerByOwnerId(TEST_OWNER_ID)).willReturn(george);
+		given(customersService.findOwnerByOwnerId(TEST_OWNER_ID)).willReturn(george);
 
 		Owner joe = new Owner();
 		joe.setId(2);
@@ -74,7 +70,7 @@ public class OwnerControllerTests {
 		joe.setAddress("123 Caramel Street");
 		joe.setCity("London");
 		joe.setTelephone("01316761638");
-		given(this.owners.createOwner(any())).willReturn(joe);
+		given(customersService.createOwner(any())).willReturn(joe);
 
 		Stream.Builder<PetType> petTypeStream = Stream.builder();
 		petTypeStream.add(new PetType(1, "cat"));
@@ -84,7 +80,7 @@ public class OwnerControllerTests {
 		petTypeStream.add(new PetType(5, "bird"));
 		petTypeStream.add(new PetType(6, "hamster"));
 		List<PetType> petTypes = petTypeStream.build().collect(Collectors.toList());
-		given(this.pets.getPetTypes()).willReturn(petTypes);
+		given(customersService.getPetTypes()).willReturn(petTypes);
 
 		Map<Integer, List<Visit>> visitMap = new HashMap<>();
 		given(this.visits.findVisitByPetIds(any())).willReturn(visitMap);
@@ -134,7 +130,7 @@ public class OwnerControllerTests {
 
 	@Test
 	public void testProcessFindFormSuccess() throws Exception {
-		given(this.owners.findOwnerByLastName("")).willReturn(Lists.newArrayList(george, new Owner()));
+		given(customersService.findOwnerByLastName("")).willReturn(Lists.newArrayList(george, new Owner()));
 		mockMvc.perform(get("/owners"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("owners/ownersList"));
@@ -142,7 +138,7 @@ public class OwnerControllerTests {
 
 	@Test
 	public void testProcessFindFormByLastName() throws Exception {
-		given(this.owners.findOwnerByLastName(george.getLastName())).willReturn(Lists.newArrayList(george));
+		given(customersService.findOwnerByLastName(george.getLastName())).willReturn(Lists.newArrayList(george));
 		mockMvc.perform(get("/owners").param("lastName", "Franklin"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/owners/" + TEST_OWNER_ID));

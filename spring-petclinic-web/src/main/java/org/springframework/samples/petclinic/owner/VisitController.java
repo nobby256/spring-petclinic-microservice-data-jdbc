@@ -22,10 +22,9 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.core.convert.ConversionService;
+import org.springframework.samples.petclinic.service.customers.CustomerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Owner;
-import org.springframework.samples.petclinic.service.customers.OwnerServiceApi;
 import org.springframework.samples.petclinic.service.customers.Pet;
-import org.springframework.samples.petclinic.service.customers.PetServiceApi;
 import org.springframework.samples.petclinic.service.visits.Visit;
 import org.springframework.samples.petclinic.service.visits.VisitRequest;
 import org.springframework.samples.petclinic.service.visits.VisitServiceApi;
@@ -50,15 +49,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/owners/{ownerId}/pets/{petId}")
 class VisitController {
 
-	private final OwnerServiceApi owners;
-	private final PetServiceApi pets;
+	private final CustomerServiceApi customersService;
 	private final VisitServiceApi visits;
 	private final ConversionService convertionService;
 
-	public VisitController(OwnerServiceApi owners, PetServiceApi pets, VisitServiceApi visits,
+	public VisitController(CustomerServiceApi customersService, VisitServiceApi visits,
 			ConversionService convertionService) {
-		this.owners = owners;
-		this.pets = pets;
+		this.customersService = customersService;
 		this.visits = visits;
 		this.convertionService = convertionService;
 	}
@@ -71,12 +68,12 @@ class VisitController {
 	 */
 	@ModelAttribute
 	public void loadPetWithVisit(@PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId, Model model) {
-		Owner owner = this.owners.findOwnerByOwnerId(ownerId);
+		Owner owner = customersService.findOwnerByOwnerId(ownerId);
 		model.addAttribute("owner", owner);
 		Pet pet = owner.getPets().stream().filter(p -> p.getId().equals(petId)).findFirst().get();
 		model.addAttribute("pet", pet);
 		Map<Integer, String> petTypeMap = new HashMap<>();
-		pets.getPetTypes().stream().forEach(petType -> petTypeMap.put(petType.getId(), petType.getName()));
+		customersService.getPetTypes().stream().forEach(petType -> petTypeMap.put(petType.getId(), petType.getName()));
 		model.addAttribute("petTypeMap", petTypeMap);
 		model.addAttribute("petVisits", this.visits.findVisitByPetId(petId));
 	}
