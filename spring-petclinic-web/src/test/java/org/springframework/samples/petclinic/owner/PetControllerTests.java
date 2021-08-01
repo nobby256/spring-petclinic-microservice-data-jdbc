@@ -91,6 +91,20 @@ public class PetControllerTests {
 	}
 
 	@Test
+	public void testProcessCreationFormHasErrors2() throws Exception {
+		mockMvc.perform(post("/owners/{ownerId}/pets/new", TEST_OWNER_ID)
+				.param("create", "true")
+				.param("name", "Leo")
+				.param("typeId", "1")
+				.param("birthDate", "2015-02-12"))
+				.andExpect(model().attributeHasErrors("petForm"))
+				.andExpect(model().attributeHasFieldErrors("petForm", "name"))
+				.andExpect(model().attributeHasFieldErrorCode("petForm", "name", "duplicate"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("pets/createOrUpdatePetForm"));
+	}
+
+	@Test
 	public void testInitUpdateForm() throws Exception {
 		mockMvc.perform(get("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, TEST_PET_ID))
 				.andExpect(status().isOk())

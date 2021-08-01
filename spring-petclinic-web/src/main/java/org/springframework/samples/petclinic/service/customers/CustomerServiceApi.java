@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,9 +47,6 @@ public interface CustomerServiceApi {
 
 	@GetMapping(path = "owners/*/pets/{petId}")
 	Pet findPetByPetId(@PathVariable("petId") int petId);
-
-	@GetMapping(path = "owners/{ownerId}/pets", params = { "petName" }, produces = MediaType.APPLICATION_JSON_VALUE)
-	List<Pet> findPetByOwnerIdAndPetName(@PathVariable("ownerId") int ownerId, @Param("petName") String petName);
 
 	@GetMapping(path = "owners/{ownerId}/pets")
 	List<Pet> findPetByOwnerId(@Param("ownerId") int ownerId);

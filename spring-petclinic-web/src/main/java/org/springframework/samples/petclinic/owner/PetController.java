@@ -71,12 +71,14 @@ class PetController {
 	}
 
 	@PostMapping("/pets/new")
-	public String processCreationForm(@Valid PetForm form, BindingResult result, @PathVariable("ownerId") int ownerId) {
+	public String processCreationForm(@Valid PetForm form, BindingResult result, Owner owner, @PathVariable("ownerId") int ownerId) {
 		if (result.hasErrors()) {
 			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		}
-		if (!customersService.findPetByOwnerIdAndPetName(ownerId, form.getName()).isEmpty()) {
+
+		if (owner.getPets().stream().filter(pet -> pet.getName().equals(form.getName())).count() > 0) {
 			result.rejectValue("name", "duplicate", "already exists");
+			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		}
 
 		PetRequest request = new PetRequest();

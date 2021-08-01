@@ -56,11 +56,6 @@ public class PetServiceImpl implements PetServiceApi {
 	}
 
 	@Override
-	public List<Pet> findPetByOwnerIdAndPetName(int ownerId, String petName) {
-		return petRepository.findByOwnerIdAndName(ownerId, petName);
-	}
-
-	@Override
 	public List<Pet> findPetByOwnerId(int ownerId) {
 		return petRepository.findByOwnerId(ownerId);
 	}
