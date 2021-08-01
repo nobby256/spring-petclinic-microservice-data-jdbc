@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.customers.model;
 import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -37,6 +38,7 @@ import lombok.EqualsAndHashCode;
 public class Pet {
 
 	@Id
+	@Column("ID")
 	private Integer id;
 
 	private String name;

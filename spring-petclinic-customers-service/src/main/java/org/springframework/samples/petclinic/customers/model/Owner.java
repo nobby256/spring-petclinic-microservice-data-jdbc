@@ -57,7 +57,7 @@ public class Owner {
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
 
-	@MappedCollection(idColumn = "owner_id", keyColumn = "id")
+	@MappedCollection(idColumn = "OWNER_ID", keyColumn = "ID")
 	private List<Pet> pets = new ArrayList<>();
 
 }
