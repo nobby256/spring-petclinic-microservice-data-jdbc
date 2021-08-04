@@ -17,18 +17,18 @@ import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.samples.petclinic.visit.model.Visit;
 
 @DataJdbcTest
-public class VisitServiceImplTest {
+public class VisitServiceTest {
 
 	@Autowired
 	VisitRepository visitRepository;
 
-	VisitServiceImpl target;
+	VisitService target;
 
 	final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	@BeforeEach
 	void setup() {
-		target = new VisitServiceImpl(visitRepository);
+		target = new VisitService(visitRepository);
 	}
 
 	protected Visit[] expectedVisits(Integer... petIds) {

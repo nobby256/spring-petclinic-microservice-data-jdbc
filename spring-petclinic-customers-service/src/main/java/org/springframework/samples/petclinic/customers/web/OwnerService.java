@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class OwnerServiceImpl implements OwnerServiceApi {
+public class OwnerService implements OwnerServiceApi {
 
 	protected OwnerRepository ownerRepository;
 
-	public OwnerServiceImpl(OwnerRepository ownerRepository) {
+	public OwnerService(OwnerRepository ownerRepository) {
 		this.ownerRepository = ownerRepository;
 	}
 

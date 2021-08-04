@@ -12,16 +12,16 @@ import org.springframework.samples.petclinic.customers.model.Owner;
 import org.springframework.samples.petclinic.customers.model.OwnerRequest;
 
 @DataJdbcTest
-public class OwnerServiceImplTest {
+public class OwnerServiceTest {
 
 	@Autowired
 	OwnerRepository ownerRepository;
 
-	OwnerServiceImpl target;
+	OwnerService target;
 
 	@BeforeEach
 	void setup() {
-		target = new OwnerServiceImpl(ownerRepository);
+		target = new OwnerService(ownerRepository);
 	}
 
 	@Test

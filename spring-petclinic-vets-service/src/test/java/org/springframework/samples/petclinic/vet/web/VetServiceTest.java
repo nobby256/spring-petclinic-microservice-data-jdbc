@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.samples.petclinic.vet.model.VetDetail;
 
 @DataJdbcTest
-public class VetServiceImplTest {
+public class VetServiceTest {
 
 	@Autowired
 	VetRepository vetRepository;
@@ -19,11 +19,11 @@ public class VetServiceImplTest {
 	@Autowired
 	SpecialtyRepository specialtyRepository;
 
-	VetServiceImpl target;
+	VetService target;
 
 	@BeforeEach
 	void setup() {
-		target = new VetServiceImpl(vetRepository, specialtyRepository);
+		target = new VetService(vetRepository, specialtyRepository);
 	}
 
 	@Test

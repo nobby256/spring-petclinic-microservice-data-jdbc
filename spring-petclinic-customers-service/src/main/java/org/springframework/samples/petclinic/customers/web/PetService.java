@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class PetServiceImpl implements PetServiceApi {
+public class PetService implements PetServiceApi {
 
 	protected PetRepository petRepository;
 
-	public PetServiceImpl(PetRepository petRepository) {
+	public PetService(PetRepository petRepository) {
 		this.petRepository = petRepository;
 	}
 

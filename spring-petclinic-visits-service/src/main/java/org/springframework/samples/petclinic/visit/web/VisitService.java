@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class VisitServiceImpl implements VisitServiceApi {
+public class VisitService implements VisitServiceApi {
 
 	protected VisitRepository visitRepository;
 
-	public VisitServiceImpl(VisitRepository visitRepository) {
+	public VisitService(VisitRepository visitRepository) {
 		this.visitRepository = visitRepository;
 	}
 

@@ -12,16 +12,16 @@ import org.springframework.samples.petclinic.customers.model.Pet;
 import org.springframework.samples.petclinic.customers.model.PetType;
 
 @DataJdbcTest
-public class PetServiceImplTest {
+public class PetServiceTest {
 
 	@Autowired
 	PetRepository petRepository;
 
-	PetServiceImpl target;
+	PetService target;
 
 	@BeforeEach
 	void setup() {
-		target = new PetServiceImpl(petRepository);
+		target = new PetService(petRepository);
 	}
 
 	@Test

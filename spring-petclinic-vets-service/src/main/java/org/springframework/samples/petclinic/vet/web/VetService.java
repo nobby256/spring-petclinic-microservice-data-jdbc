@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class VetServiceImpl implements VetServiceApi {
+public class VetService implements VetServiceApi {
 
 	protected VetRepository vetRepository;
 
 	protected SpecialtyRepository specialtyRepository;
 
-	public VetServiceImpl(VetRepository vetRepository, SpecialtyRepository specialtyRepository) {
+	public VetService(VetRepository vetRepository, SpecialtyRepository specialtyRepository) {
 		this.vetRepository = vetRepository;
 		this.specialtyRepository = specialtyRepository;
 	}
