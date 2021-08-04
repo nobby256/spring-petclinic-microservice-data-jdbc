@@ -33,7 +33,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Specialty implements Serializable {
+
 	@Id
 	private Integer id;
+
 	private String name;
 }

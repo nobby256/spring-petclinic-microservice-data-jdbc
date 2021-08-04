@@ -15,15 +15,16 @@
  */
 package org.springframework.samples.petclinic.customers.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Simple business object representing a pet.
@@ -35,10 +36,10 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode
-public class Pet {
+@ToString
+public class Pet implements Serializable {
 
 	@Id
-	@Column("ID")
 	private Integer id;
 
 	private String name;

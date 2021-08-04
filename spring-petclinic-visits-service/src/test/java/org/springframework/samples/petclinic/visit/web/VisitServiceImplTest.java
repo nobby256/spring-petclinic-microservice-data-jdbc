@@ -39,28 +39,28 @@ public class VisitServiceImplTest {
 		visit = new Visit();
 		visit.setId(1);
 		visit.setPetId(7);
-		visit.setVisitDate(LocalDate.parse("2013-01-01", formatter));
+		visit.setVisitDate(LocalDate.parse("2010-03-04", formatter));
 		visit.setDescription("rabies shot");
 		visits.add(visit);
 
 		visit = new Visit();
 		visit.setId(2);
 		visit.setPetId(6);
-		visit.setVisitDate(LocalDate.parse("2013-01-02", formatter));
+		visit.setVisitDate(LocalDate.parse("2011-03-04", formatter));
 		visit.setDescription("rabies shot");
 		visits.add(visit);
 
 		visit = new Visit();
 		visit.setId(3);
 		visit.setPetId(8);
-		visit.setVisitDate(LocalDate.parse("2013-01-03", formatter));
+		visit.setVisitDate(LocalDate.parse("2009-06-04", formatter));
 		visit.setDescription("neutered");
 		visits.add(visit);
 
 		visit = new Visit();
 		visit.setId(4);
 		visit.setPetId(7);
-		visit.setVisitDate(LocalDate.parse("2013-01-04", formatter));
+		visit.setVisitDate(LocalDate.parse("2008-09-04", formatter));
 		visit.setDescription("spayed");
 		visits.add(visit);
 

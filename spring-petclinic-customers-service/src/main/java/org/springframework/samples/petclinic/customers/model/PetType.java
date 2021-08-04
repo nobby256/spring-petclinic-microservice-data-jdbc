@@ -15,11 +15,14 @@
  */
 package org.springframework.samples.petclinic.customers.model;
 
+import java.io.Serializable;
+
 import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Can be Cat, Dog, Hamster...
@@ -29,8 +32,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode
+@ToString
 @AllArgsConstructor
-public class PetType {
+public class PetType implements Serializable {
 
 	@Id
 	private Integer id;

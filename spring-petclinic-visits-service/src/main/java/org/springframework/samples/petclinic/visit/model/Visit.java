@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.visit.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Simple JavaBean domain object representing a visit.
@@ -35,7 +37,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode
-public class Visit {
+@ToString
+public class Visit implements Serializable {
 
 	@Id
 	private Integer id;

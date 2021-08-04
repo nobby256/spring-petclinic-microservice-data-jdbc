@@ -48,7 +48,7 @@ public class OwnerServiceImplTest {
 
 		Owner actual = target.createOwner(ownerRequest);
 
-		assertThat(actual.getId()).isNotNull();
+		assertThat(actual.getId()).isEqualTo(11);
 		assertThat(actual.getFirstName()).isEqualTo("たろう");
 		assertThat(actual.getLastName()).isEqualTo("やまだ");
 		assertThat(actual.getAddress()).isEqualTo("じゅうしょ");

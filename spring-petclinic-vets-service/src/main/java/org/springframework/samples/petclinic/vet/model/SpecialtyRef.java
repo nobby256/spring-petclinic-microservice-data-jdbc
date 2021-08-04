@@ -14,11 +14,12 @@ import lombok.ToString;
  *
  * @author Maciej Walkowiak
  */
-@Table("VET_SPECIALTY")
 @Data
 @EqualsAndHashCode
 @ToString
+@Table("vet_specialty")
 public class SpecialtyRef implements Serializable {
+
 	private Integer specialty;
 
 	public SpecialtyRef(Integer specialty) {

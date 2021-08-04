@@ -15,8 +15,9 @@
  */
 package org.springframework.samples.petclinic.customers.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
@@ -25,6 +26,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Simple JavaBean domain object representing an owner.
@@ -36,7 +39,9 @@ import lombok.Data;
  * @author Maciej Walkowiak
  */
 @Data
-public class Owner {
+@EqualsAndHashCode
+@ToString
+public class Owner implements Serializable {
 
 	@Id
 	private Integer id;
@@ -57,7 +62,7 @@ public class Owner {
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
 
-	@MappedCollection(idColumn = "OWNER_ID", keyColumn = "ID")
-	private List<Pet> pets = new ArrayList<>();
+	@MappedCollection(idColumn = "owner_id")
+	private Set<Pet> pets = new HashSet<>();
 
 }

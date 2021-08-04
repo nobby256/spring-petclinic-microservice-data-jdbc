@@ -16,8 +16,8 @@
 package org.springframework.samples.petclinic.vet.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -54,7 +54,7 @@ public class Vet implements Serializable {
 	private String lastName;
 
 	@JsonIgnore
-	@MappedCollection(idColumn = "VET", keyColumn = "SPECIALTY")
-	private List<SpecialtyRef> specialtyRefs = new ArrayList<>();
+	@MappedCollection(idColumn = "vet")
+	private Set<SpecialtyRef> specialtyRefs = new HashSet<>();
 
 }
