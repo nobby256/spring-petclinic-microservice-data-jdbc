@@ -25,7 +25,7 @@ public interface OwnerServiceApi {
 	Owner findOwnerByOwnerId(@PathVariable("ownerId") int ownerId);
 
 	@GetMapping(path = "/owners", params = { "lastName" })
-	List<Owner> findOwnerByLastName(@RequestParam(name = "lastName", required = false) String lastName);
+	List<Owner> findOwnerByLastName(@RequestParam(name = "lastName") String lastName);
 
 	@PutMapping(path = "/owners/{ownerId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

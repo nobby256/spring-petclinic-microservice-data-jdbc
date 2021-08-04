@@ -7,9 +7,6 @@ server:
   shutdown: graceful
 
 spring:
-  sleuth:
-    sampler:
-      probability: 1.0
   cloud:
     config:
       # Allow the microservices to override the remote properties with their own System properties or config file
@@ -18,10 +15,6 @@ spring:
       override-none: true
   jmx:
     enabled: true
-  datasource:
-    url: jdbc:mysql://localhost/petclinic_jdbc
-    username: root
-    password: password
   messages:
     basename: messages/messages
 
@@ -40,22 +33,5 @@ management.endpoints.web.exposure.include: "*"
 # Waiting issue https://github.com/spring-projects/spring-boot/issues/13042
 spring.cloud.refresh.refreshable: false
 
-
 # Logging
 logging.level.org.springframework: INFO
-
-# Metrics
-management:
-  endpoint:
-    metrics:
-      enabled: true
-    prometheus:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  metrics:
-    export:
-      prometheus:
-        enabled: true
